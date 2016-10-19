@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'rails_helper'
+
 
 describe User do
   before { @user = FactoryGirl.build(:user) }
@@ -10,4 +11,6 @@ describe User do
   it { should respond_to(:password_confirmation) }
 
   it { should be_valid }
+
+  it { should validate_presence_of(:email) }
 end
