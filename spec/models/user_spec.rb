@@ -13,4 +13,7 @@ describe User do
   it { should be_valid }
 
   it { should validate_presence_of(:email) }
+  it { should validate_uniqueness_of(:email) }
+  it { should validate_confirmation_of(:password) }
+  it { should allow_value("example2domain.com").for(:email) }
 end
