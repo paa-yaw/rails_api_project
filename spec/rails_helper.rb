@@ -57,7 +57,6 @@ RSpec.configure do |config|
   
   # needed to inject the request.env['warden'] object into the middleware stack
   config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include Devise::Test::ControllerHelpers, type: :controller
 
   #Including to test requests
   config.include Request::JsonHelpers, :type => :controller

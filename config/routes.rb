@@ -16,5 +16,9 @@ Rails.application.routes.draw do
    #  				constraints: ApiConstraints.new(version: 2) do
    #    resources :users, only: [:show, :create, :update, :destroy]					
   	# end
+    # scope module: :v3,
+    #          constraints: ApiConstraints.new(version: 3) do 
+    #            resources :users, only: [:show, :create, :update, :destroy]
+    #          end
   end
 end
