@@ -4,8 +4,12 @@ module Authenticable
   end
 
   def authenticate_with_token!
-  	unless current_user.present?
-      render json: { errors: "Not authenticated"}
+  	unless user_signed_in?
+      render json: { errors: "Not authenticated"}, status: :unauthorized
     end
+  end
+
+  def user_signed_in?
+    current_user.present?
   end
 end
