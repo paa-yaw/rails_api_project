@@ -1,6 +1,6 @@
 require "rails_helper"
 
-class Authentication
+class Authentication < ActionController::Base
   include Authenticable
 end
 
@@ -12,8 +12,8 @@ describe Authenticable do
   describe "#current_user" do 
     before do
       @user = FactoryGirl.create :user
-      request.headers["Authorization"] = @user.auth_token
-      authentication.stub(:request).and_return(request)   
+      api_authorization_header @user.auth_token
+      allow(authentication).to receive(:request).and_return(request)   
     end
 
   it "returns user from authorization header" do 
@@ -25,9 +25,10 @@ end
   	before do 
       @user = FactoryGirl.create :user
       authentication.stub(:current_user).and_return(nil)
-      response.stub(:response_code).and_return(401)
-      response.stub(:body).and_return({"errors"=>"Not authenticated"}.to_json)
+      allow(response).to receive(:response_code).and_return(401)
+      allow(response).to receive(:body).and_return({"errors"=>"Not authenticated"}.to_json)
       authentication.stub(:response).and_return(response)
+      allow(authentication).to receive(:response).and_return(response)
     end
 
     it "renders json response" do
